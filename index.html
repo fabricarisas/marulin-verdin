@@ -1,127 +1,765 @@
 <!DOCTYPE html>
-<html lang="es-ES">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GYM</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Marulín Verdín 🌱</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css?v=60"
+    >
 </head>
 
+
 <body>
-    <header class="header">
+
+    <!-- =====================================
+         INICIO
+    ====================================== -->
+
+    <header class="header" id="inicio">
+
+        <!-- MENU -->
 
         <div class="menu container">
 
-            <a href="#" class="logo">GYM</a>
-            <input type="checkbox" id="menu">
-            <label for="menu"><img src="images/menu.png" class="menu-icono" alt=""></label>
+            <a href="#inicio" class="logo">
+                🌱 Marulín Verdín
+            </a>
+
+
+            <input
+                type="checkbox"
+                id="menu"
+            >
+
+
+            <label
+                for="menu"
+                class="menu-boton"
+            >
+                ☰
+            </label>
+
+
             <nav class="navbar">
 
                 <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Servicios</a></li>
-                    <li><a href="#">Horario</a></li>
-                    <li><a href="#">Contactos</a></li>
+
+                    <li>
+                        <a href="#inicio">
+                            Inicio
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#juegos">
+                            Juegos
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#ruleta">
+                            Ruleta
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#como-lo-hicimos">
+                            ¿Cómo creamos este bot?
+                        </a>
+                    </li>
+
                 </ul>
 
             </nav>
 
         </div>
 
-        <div class="header-content container">
 
-            <div class="header-info">
-                <h1>Se fuerte</h1>
-                <p>Cada entrenamiento te hace mas fuerte</p>
-                <a href="#" class="btn-1">Empieza</a>
+
+        <!-- CARTEL PRINCIPAL -->
+
+        <div class="container hero-container">
+
+            <div class="hero-card">
+
+                <span class="flor-hero">
+                    🌼
+                </span>
+
+
+                <!-- MARULIN -->
+
+                <img
+                    src="images/marulin.png"
+                    alt="Marulín Verdín saludando"
+                    class="marulin-hero"
+                >
+
+
+                <div class="hero-texto">
+
+                    <h1>
+                        Marulín Verdín
+                    </h1>
+
+
+                    <p class="descripcion-principal">
+
+                        🌱 Tu bot de confianza para descubrir
+                        el maravilloso mundo de las plantas 🌱
+
+                    </p>
+
+
+                    <p class="feria">
+                        Feria de Ciencias 2026
+                    </p>
+
+
+                    <a
+                        href="#juegos"
+                        class="btn-principal"
+                    >
+                        Empezar
+                    </a>
+
+
+                    <!-- INSTAGRAM -->
+
+                    <a
+                        href="https://www.instagram.com/naturales26.sfa"
+                        class="instagram-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram de Naturales 2026"
+                    >
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <rect
+                                x="3"
+                                y="3"
+                                width="18"
+                                height="18"
+                                rx="5"
+                            ></rect>
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="4"
+                            ></circle>
+
+                            <circle
+                                cx="17.5"
+                                cy="6.5"
+                                r="1"
+                            ></circle>
+
+                        </svg>
+
+                        <span>
+                            @naturales26.sfa
+                        </span>
+
+                    </a>
+
+                </div>
+
             </div>
 
         </div>
 
     </header>
 
-    <section class="gym container">
 
-        <div class="gym-1">
-            <h2><span>Gym</span> Funcional</h2>
-            <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum hic suscipit consequatur sit accusamus
-                eaque excepturi, sequi quas ea! Eveniet deserunt illum aperiam? Nesciunt dolore ipsa, beatae ratione
-                consectetur nemo!
-            </p>
-            <a href="#" class="btn-2">Empieza</a>
+
+    <!-- =====================================
+         JUEGOS
+    ====================================== -->
+
+    <section
+        class="juegos container"
+        id="juegos"
+    >
+
+        <h2 class="titulo-seccion">
+            🎮 Jugá con Marulín
+        </h2>
+
+
+        <p class="subtitulo-seccion">
+
+            Son 10 preguntas.
+            Cada respuesta correcta vale 10 puntos.
+            ¡Intentá llegar a 100! 🌱
+
+        </p>
+
+
+
+        <!-- MARCADOR -->
+
+        <div class="marcador-juego">
+
+            <div class="jugador">
+
+                <label for="nombreJugador">
+                    👤 Jugador
+                </label>
+
+                <input
+                    type="text"
+                    id="nombreJugador"
+                    maxlength="20"
+                    placeholder="Escribí tu nombre"
+                >
+
+            </div>
+
+
+
+            <div class="datos-puntaje">
+
+                <div class="dato-marcador">
+
+                    <span>
+                        ⭐ Puntaje
+                    </span>
+
+                    <strong>
+                        <span id="puntajeActual">0</span>/100
+                    </strong>
+
+                </div>
+
+
+                <div class="dato-marcador">
+
+                    <span>
+                        ❓ Pregunta
+                    </span>
+
+                    <strong>
+                        <span id="numeroPregunta">0</span>/10
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <button
+                id="nuevoJugador"
+                class="btn-nuevo"
+            >
+                👤 Nueva persona
+            </button>
 
         </div>
 
-        <div class="gym-2">
 
-            <img class="img-1" src="images/g1.jpg" alt="gym">
-            <img class="img-2" src="images/g2.jpg" alt="gym">
+
+        <!-- TARJETAS -->
+
+        <div class="tarjetas-juegos">
+
+            <article class="tarjeta tarjeta-amarilla">
+
+                <span class="emoji">
+                    🧠
+                </span>
+
+                <h3>
+                    ¿Sos experto en plantas?
+                </h3>
+
+                <p>
+                    Preguntas de biología vegetal
+                    para poner a prueba lo que sabés.
+                </p>
+
+                <button
+                    class="boton-juego"
+                    data-juego="experto"
+                >
+                    Jugar
+                </button>
+
+            </article>
+
+
+
+            <article class="tarjeta tarjeta-verde">
+
+                <span class="emoji">
+                    ✅
+                </span>
+
+                <h3>
+                    Verdadero o falso
+                </h3>
+
+                <p>
+                    Algunas afirmaciones
+                    no son tan obvias como parecen.
+                </p>
+
+                <button
+                    class="boton-juego"
+                    data-juego="verdadero"
+                >
+                    Jugar
+                </button>
+
+            </article>
+
+
+
+            <article class="tarjeta tarjeta-rosa">
+
+                <span class="emoji">
+                    🌱
+                </span>
+
+                <h3>
+                    Salvá la planta
+                </h3>
+
+                <p>
+                    Analizá situaciones reales
+                    y decidí qué harías.
+                </p>
+
+                <button
+                    class="boton-juego"
+                    data-juego="salvar"
+                >
+                    Jugar
+                </button>
+
+            </article>
+
+        </div>
+
+
+        <div
+            id="panelJuego"
+            class="panel-juego oculto"
+        ></div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         RULETA
+    ====================================== -->
+
+    <section
+        class="ruleta-section"
+        id="ruleta"
+    >
+
+        <div class="container ruleta-contenido">
+
+            <h2 class="titulo-seccion">
+                🌼 Ruleta de Marulín
+            </h2>
+
+
+            <p class="subtitulo-seccion">
+
+                Girá la flor y descubrí si te toca
+                un reto, una adivinanza
+                o el premio sorpresa.
+
+            </p>
+
+
+
+            <div class="ruleta-wrapper">
+
+                <div class="puntero"></div>
+
+
+                <div
+                    class="flor-ruleta"
+                    id="florRuleta"
+                >
+
+                    <div class="petalo petalo1">
+                        <span>
+                            🎯<br>Reto
+                        </span>
+                    </div>
+
+
+                    <div class="petalo petalo2">
+                        <span>
+                            🧩<br>Adivinanza
+                        </span>
+                    </div>
+
+
+                    <div class="petalo petalo3">
+                        <span>
+                            🎯<br>Reto
+                        </span>
+                    </div>
+
+
+                    <div class="petalo petalo4">
+                        <span>
+                            🎯<br>Reto
+                        </span>
+                    </div>
+
+
+                    <div class="petalo petalo5">
+                        <span>
+                            🧩<br>Adivinanza
+                        </span>
+                    </div>
+
+
+                    <div class="petalo petalo6">
+                        <span>
+                            🎁<br>Premio
+                        </span>
+                    </div>
+
+
+                    <div class="centro-flor">
+                        🌱
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <button
+                id="btnRuleta"
+                class="btn-ruleta"
+            >
+                🌼 Girar ruleta
+            </button>
+
+
+            <div
+                id="resultadoRuleta"
+                class="resultado-ruleta"
+            >
+                ¿Qué te tocará? 👀
+            </div>
 
         </div>
 
     </section>
 
-     <section class="gym container">
 
-        <div class="gym-2">
 
-            <img class="img-1" src="images/g3.jpg" alt="gym">
-            <img class="img-2" src="images/g4.jpg" alt="gym">
+    <!-- =====================================
+         COMO CREAMOS EL BOT
+    ====================================== -->
+
+    <section
+        class="como-section"
+        id="como-lo-hicimos"
+    >
+
+        <div class="container">
+
+            <h2 class="titulo-seccion titulo-como">
+                🤖 ¿Cómo creamos este bot?
+            </h2>
+
+
+            <!-- HISTORIA -->
+
+            <div class="historia-card">
+
+                <h3>
+                    💚 Sobre nuestro proyecto
+                </h3>
+
+
+                <p>
+
+                    <strong>
+                        Nosotros somos Mía Font, Tomás Molina,
+                        Sol Brigante y Fabriccio Vietta,
+                        y fuimos quienes creamos todo este proyecto.
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    La verdad es que crear este bot, el experimento,
+                    la página web y todo lo que forma parte de
+                    Marulín Verdín requirió muchísimo esfuerzo,
+                    tanto emocional como económico.
+
+                    Aun así, después de todo el trabajo que hicimos,
+                    estamos súper felices con el resultado.
+
+                </p>
+
+
+                <p>
+
+                    Marulín Verdín es muy importante para nosotros
+                    porque representa nuestro proyecto para la última
+                    Feria de Ciencias de nuestra etapa escolar.
+
+                    Por eso tiene una carga emocional bastante grande.
+
+                    Aunque, siendo sinceros, también estamos
+                    un poquito felices de que sea la última.
+
+                </p>
+
+
+                <p>
+
+                    Crear el código utilizando
+                    <strong>Arduino IDE</strong>
+                    y un
+                    <strong>ESP32-WROOM</strong>,
+                    para poder medir el nivel de humedad de la tierra
+                    y comunicarnos con la planta mediante un bot,
+                    fue una de las partes más difíciles.
+
+                    Ninguno de nosotros tenía experiencia previa
+                    en programación, así que prácticamente todo
+                    lo que necesitamos para construir este proyecto
+                    lo fuimos aprendiendo durante el proceso.
+
+                </p>
+
+
+
+                <!-- COMO FUNCIONA EL CODIGO -->
+
+                <div class="codigo-explicacion">
+
+                    <h3>
+                        💻 ¿Cómo funciona el código?
+                    </h3>
+
+
+                    <p>
+
+                        El programa fue desarrollado en
+                        <strong>Arduino IDE</strong>
+                        y cargado en un
+                        <strong>ESP32-WROOM</strong>.
+
+                        El ESP32 recibe los datos de un sensor
+                        de humedad colocado en la tierra de la planta.
+
+                    </p>
+
+
+                    <p>
+
+                        El sensor genera un valor diferente dependiendo
+                        de qué tan húmeda o seca se encuentre la tierra.
+
+                        A partir de esos valores realizamos una calibración
+                        para convertir la lectura del sensor en un porcentaje
+                        de humedad aproximado, desde
+                        <strong>0 %</strong>
+                        para una tierra muy seca hasta
+                        <strong>100 %</strong>
+                        para una tierra húmeda.
+
+                    </p>
+
+
+                    <p>
+
+                        El programa también conecta el ESP32
+                        a una red Wi-Fi y permite comunicarse
+                        con un bot de Telegram.
+
+                        De esta forma podemos solicitar el nivel
+                        de humedad de la planta y recibir una respuesta
+                        de Marulín indicando si necesita agua,
+                        si su humedad es adecuada o si ya recibió
+                        suficiente riego.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TARJETAS DEL PROYECTO -->
+
+            <div class="pasos">
+
+                <article class="paso">
+
+                    <div class="numero">
+                        1
+                    </div>
+
+                    <span class="paso-icono">
+                        🌱
+                    </span>
+
+                    <h3>
+                        Sensor de humedad
+                    </h3>
+
+                    <p>
+                        El sensor mide la humedad
+                        presente en la tierra.
+                    </p>
+
+                </article>
+
+
+
+                <article class="paso">
+
+                    <div class="numero">
+                        2
+                    </div>
+
+                    <span class="paso-icono">
+                        ⚡
+                    </span>
+
+                    <h3>
+                        ESP32
+                    </h3>
+
+                    <p>
+                        El ESP32 recibe y procesa
+                        la información del sensor.
+                    </p>
+
+                </article>
+
+
+
+                <article class="paso">
+
+                    <div class="numero">
+                        3
+                    </div>
+
+                    <span class="paso-icono">
+                        💻
+                    </span>
+
+                    <h3>
+                        Programación
+                    </h3>
+
+                    <p>
+                        Programamos el ESP32
+                        utilizando Arduino IDE.
+                    </p>
+
+                </article>
+
+
+
+                <article class="paso">
+
+                    <div class="numero">
+                        4
+                    </div>
+
+                    <span class="paso-icono">
+                        🤖
+                    </span>
+
+                    <h3>
+                        Marulín
+                    </h3>
+
+                    <p>
+                        Creamos un bot de Telegram
+                        para consultar el estado
+                        de la planta.
+                    </p>
+
+                </article>
+
+            </div>
 
         </div>
 
-
-        <div class="gym-1">
-            <h2><span>Gym</span> Funcional</h2>
-            <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum hic suscipit consequatur sit accusamus
-                eaque excepturi, sequi quas ea! Eveniet deserunt illum aperiam? Nesciunt dolore ipsa, beatae ratione
-                consectetur nemo!
-            </p>
-
-        </div>
-
-        
     </section>
 
-    <section class="gym container">
 
-        <div class="gym-1">
-            <h2><span>Gym</span> Funcional</h2>
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-contenido">
+
+            <h3>
+                🌱 Marulín Verdín
+            </h3>
+
             <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum hic suscipit consequatur sit accusamus
-                eaque excepturi, sequi quas ea! Eveniet deserunt illum aperiam? Nesciunt dolore ipsa, beatae ratione
-                consectetur nemo!
+                Feria de Ciencias 2026
             </p>
-            <a href="#" class="btn-2">Empieza</a>
+
+
+            <div class="links">
+
+                <a href="#inicio">
+                    Inicio
+                </a>
+
+                <a href="#juegos">
+                    Juegos
+                </a>
+
+                <a href="#ruleta">
+                    Ruleta
+                </a>
+
+                <a href="#como-lo-hicimos">
+                    Nuestro proyecto
+                </a>
+
+            </div>
 
         </div>
-
-        <div class="gym-2">
-
-            <img class="img-1" src="images/g5.jpg" alt="gym">
-            <img class="img-2" src="images/g6.jpg" alt="gym">
-
-        </div>
-
-    </section>
-
-    <footer class="footer container">
-        <h3>Logo</h3>
-        <div class="links">
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Información</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
-        </div>
-
 
     </footer>
 
 
+    <script src="script.js?v=60"></script>
 
 </body>
 

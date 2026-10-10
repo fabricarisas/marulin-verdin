@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 
 :root {
@@ -33,8 +33,8 @@
 
     box-sizing: border-box;
 
-    text-decoration: none;
     list-style: none;
+    text-decoration: none;
 }
 
 
@@ -50,11 +50,11 @@ body {
         'Poppins',
         sans-serif;
 
-    background-color:
-        var(--crema-claro);
-
     color:
         var(--texto);
+
+    background-color:
+        var(--crema-claro);
 
     overflow-x: hidden;
 }
@@ -69,6 +69,13 @@ input {
 }
 
 
+button {
+
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+
 .container {
 
     width: 100%;
@@ -77,8 +84,8 @@ input {
 
     margin: 0 auto;
 
-    padding-left: 18px;
-    padding-right: 18px;
+    padding-left: 17px;
+    padding-right: 17px;
 }
 
 
@@ -89,30 +96,40 @@ input {
 
 .menu {
 
-    position: absolute;
+    width: 100%;
 
-    top: 0;
-    left: 0;
-    right: 0;
+    position: relative;
 
-    min-height: 68px;
+    z-index: 100;
+
+    background:
+        rgba(255, 247, 232, 0.97);
+
+    border-bottom:
+        2px solid
+        var(--amarillo-claro);
+}
+
+
+.menu-contenido {
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    min-height: 66px;
+
+    margin: 0 auto;
+
+    padding:
+        10px 17px;
 
     display: flex;
 
     align-items: center;
     justify-content: space-between;
 
-    padding-top: 10px;
-    padding-bottom: 10px;
-
-    background-color:
-        rgba(255, 247, 232, 0.97);
-
-    border-bottom:
-        2px solid
-        var(--amarillo-claro);
-
-    z-index: 1000;
+    position: relative;
 }
 
 
@@ -131,7 +148,7 @@ input {
 }
 
 
-#menu {
+#menu-check {
 
     display: none;
 }
@@ -139,10 +156,10 @@ input {
 
 .menu-boton {
 
+    font-size: 29px;
+
     color:
         var(--verde-oscuro);
-
-    font-size: 29px;
 
     cursor: pointer;
 }
@@ -158,41 +175,47 @@ input {
 
     display: none;
 
-    background-color:
+    flex-direction: column;
+
+    background:
         var(--crema);
 
+    border-bottom:
+        2px solid
+        var(--amarillo-claro);
+
     box-shadow:
-        0 8px 15px
-        rgba(0, 0, 0, 0.05);
+        0 10px 20px
+        rgba(0, 0, 0, 0.06);
 }
 
 
-.navbar li a {
+.navbar a {
 
     display: block;
 
     padding:
-        15px 22px;
-
-    color:
-        var(--verde-oscuro);
+        15px 20px;
 
     font-family:
         'Fredoka',
         sans-serif;
+
+    color:
+        var(--verde-oscuro);
 }
 
 
-.navbar li a:hover {
+.navbar a:hover {
 
-    background-color:
+    background:
         var(--amarillo-claro);
 }
 
 
-#menu:checked ~ .navbar {
+#menu-check:checked ~ .navbar {
 
-    display: block;
+    display: flex;
 }
 
 
@@ -203,16 +226,7 @@ input {
 
 .header {
 
-    position: relative;
-
     min-height: 100vh;
-
-    padding-top: 105px;
-    padding-bottom: 55px;
-
-    display: flex;
-
-    align-items: center;
 
     background:
 
@@ -224,7 +238,7 @@ input {
 
         radial-gradient(
             circle at 95% 70%,
-            rgba(200, 227, 166, 0.72),
+            rgba(200, 227, 166, 0.75),
             transparent 38%
         ),
 
@@ -234,7 +248,8 @@ input {
 
 .hero-container {
 
-    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 65px;
 
     display: flex;
 
@@ -249,34 +264,27 @@ input {
 
 .hero-card {
 
-    position: relative;
-
     width: 100%;
 
-    max-width: 550px;
+    max-width: 540px;
 
-    min-height: 620px;
-
-    margin-top: 80px;
+    margin-top: 105px;
 
     padding:
-        285px
-        24px
-        38px;
+        185px
+        21px
+        34px;
 
-    display: flex;
+    position: relative;
 
-    align-items: center;
-    justify-content: center;
-
-    background-color:
+    background:
         rgba(255, 253, 246, 0.98);
 
     border:
         3px solid
         var(--amarillo);
 
-    border-radius: 34px;
+    border-radius: 32px;
 
     box-shadow:
         0 15px 35px
@@ -293,18 +301,17 @@ input {
 
 .marulin-hero {
 
-    position: absolute;
-
     width:
         min(
-            310px,
-            82vw
+            270px,
+            76vw
         );
 
     height: auto;
 
-    top: -105px;
+    position: absolute;
 
+    top: -105px;
     left: 50%;
 
     transform:
@@ -317,8 +324,21 @@ input {
     filter:
         drop-shadow(
             0 12px 14px
-            rgba(57, 120, 75, 0.17)
+            rgba(57, 120, 75, 0.15)
         );
+}
+
+
+.flor-hero {
+
+    position: absolute;
+
+    top: 14px;
+    left: 18px;
+
+    z-index: 4;
+
+    font-size: 30px;
 }
 
 
@@ -337,7 +357,7 @@ input {
 
 .hero-texto h1 {
 
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 
     font-family:
         'Fredoka',
@@ -345,9 +365,9 @@ input {
 
     font-size:
         clamp(
-            40px,
-            12vw,
-            54px
+            39px,
+            11vw,
+            53px
         );
 
     line-height: 1;
@@ -359,41 +379,28 @@ input {
 
 .descripcion-principal {
 
-    max-width: 500px;
-
     margin:
         0 auto 10px;
 
+    max-width: 480px;
+
     font-size: 15px;
 
-    line-height: 1.65;
+    line-height: 1.7;
 }
 
 
 .feria {
 
-    margin-bottom: 24px;
+    margin-bottom: 23px;
 
     color:
-        #7A826F;
+        #81877E;
 
     font-size: 12px;
 
     letter-spacing:
-        0.7px;
-}
-
-
-.flor-hero {
-
-    position: absolute;
-
-    top: 16px;
-    left: 18px;
-
-    font-size: 33px;
-
-    z-index: 5;
+        0.6px;
 }
 
 
@@ -402,11 +409,11 @@ input {
     display: inline-block;
 
     padding:
-        13px 31px;
+        13px 32px;
 
     border-radius: 30px;
 
-    background-color:
+    background:
         var(--verde);
 
     color: white;
@@ -415,17 +422,18 @@ input {
         'Fredoka',
         sans-serif;
 
-    font-size: 17px;
+    font-size: 18px;
 
     font-weight: 600;
 
-    transition: 0.2s;
+    transition:
+        0.2s;
 }
 
 
 .btn-principal:hover {
 
-    background-color:
+    background:
         var(--verde-oscuro);
 
     transform:
@@ -462,8 +470,6 @@ input {
     font-size: 14px;
 
     font-weight: 600;
-
-    transition: 0.2s;
 }
 
 
@@ -477,20 +483,21 @@ input {
     stroke:
         currentColor;
 
-    stroke-width: 1.8;
+    stroke-width:
+        1.8;
 
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    stroke-linecap:
+        round;
+
+    stroke-linejoin:
+        round;
 }
 
 
 .instagram-link:hover {
 
     color:
-        #E56A8A;
-
-    transform:
-        translateY(-2px);
+        #E16E8A;
 }
 
 
@@ -502,6 +509,8 @@ input {
 .titulo-seccion {
 
     margin-bottom: 10px;
+
+    text-align: center;
 
     font-family:
         'Fredoka',
@@ -524,7 +533,9 @@ input {
     max-width: 650px;
 
     margin:
-        0 auto 35px;
+        0 auto 32px;
+
+    text-align: center;
 
     color:
         #687469;
@@ -549,6 +560,11 @@ input {
 }
 
 
+
+/* =====================================
+   MARCADOR
+===================================== */
+
 .marcador-juego {
 
     width: 100%;
@@ -558,15 +574,15 @@ input {
     margin:
         0 auto 30px;
 
-    padding: 18px;
+    padding: 17px;
 
     display: flex;
 
     flex-direction: column;
 
-    gap: 16px;
+    gap: 15px;
 
-    background-color:
+    background:
         var(--crema);
 
     border:
@@ -610,13 +626,19 @@ input {
     padding:
         13px 15px;
 
+    outline: none;
+
     border:
         2px solid
         var(--verde-claro);
 
     border-radius: 18px;
 
-    outline: none;
+    background:
+        white;
+
+    color:
+        var(--texto);
 
     font-size: 16px;
 }
@@ -636,23 +658,23 @@ input {
     grid-template-columns:
         1fr 1fr;
 
-    gap: 10px;
+    gap: 9px;
 }
 
 
 .dato-marcador {
 
     padding:
-        11px 6px;
-
-    background-color:
-        var(--amarillo-claro);
+        11px 5px;
 
     border-radius: 18px;
+
+    background:
+        var(--amarillo-claro);
 }
 
 
-.dato-marcador span {
+.dato-marcador > span {
 
     display: block;
 
@@ -670,7 +692,7 @@ input {
         'Fredoka',
         sans-serif;
 
-    font-size: 19px;
+    font-size: 20px;
 
     color:
         var(--verde-oscuro);
@@ -680,8 +702,6 @@ input {
 .dato-marcador strong span {
 
     display: inline;
-
-    font-size: inherit;
 }
 
 
@@ -698,7 +718,7 @@ input {
 
     border-radius: 23px;
 
-    background-color:
+    background:
         transparent;
 
     color:
@@ -728,19 +748,19 @@ input {
 
 .tarjeta {
 
-    min-height: 230px;
+    min-height: 225px;
 
     padding:
-        28px 22px;
+        26px 20px;
 
     display: flex;
 
     flex-direction: column;
 
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
-    border-radius: 28px;
+    border-radius: 27px;
 
     box-shadow:
         var(--sombra);
@@ -749,28 +769,28 @@ input {
 
 .tarjeta-amarilla {
 
-    background-color:
+    background:
         var(--amarillo-claro);
 }
 
 
 .tarjeta-verde {
 
-    background-color:
+    background:
         #DDEFC9;
 }
 
 
 .tarjeta-rosa {
 
-    background-color:
+    background:
         var(--rosa-claro);
 }
 
 
 .emoji {
 
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 
     font-size: 43px;
 }
@@ -778,7 +798,7 @@ input {
 
 .tarjeta h3 {
 
-    margin-bottom: 10px;
+    margin-bottom: 9px;
 
     font-family:
         'Fredoka',
@@ -793,7 +813,7 @@ input {
 
 .tarjeta p {
 
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 
     font-size: 14px;
 
@@ -803,19 +823,20 @@ input {
 
 .boton-juego {
 
-    min-height: 46px;
+    min-height: 45px;
 
     padding:
         11px 25px;
 
     border: none;
 
-    border-radius: 24px;
+    border-radius: 25px;
 
-    background-color:
+    background:
         var(--verde);
 
-    color: white;
+    color:
+        white;
 
     font-family:
         'Fredoka',
@@ -824,6 +845,13 @@ input {
     font-size: 16px;
 
     cursor: pointer;
+}
+
+
+.boton-juego:hover {
+
+    background:
+        var(--verde-oscuro);
 }
 
 
@@ -843,14 +871,14 @@ input {
 
     padding: 21px;
 
-    background-color:
+    background:
         var(--crema);
 
     border:
         2px solid
         var(--amarillo);
 
-    border-radius: 26px;
+    border-radius: 27px;
 
     box-shadow:
         var(--sombra);
@@ -859,7 +887,7 @@ input {
 
 .panel-juego h3 {
 
-    margin-bottom: 8px;
+    margin-bottom: 7px;
 
     font-family:
         'Fredoka',
@@ -874,7 +902,7 @@ input {
 
 .categoria-pregunta {
 
-    margin-bottom: 17px;
+    margin-bottom: 18px;
 
     color:
         #788079;
@@ -889,9 +917,9 @@ input {
 
     font-size: 16px;
 
-    line-height: 1.55;
-
     font-weight: 500;
+
+    line-height: 1.6;
 }
 
 
@@ -909,10 +937,10 @@ input {
 
     width: 100%;
 
-    min-height: 51px;
+    min-height: 52px;
 
     padding:
-        12px 13px;
+        12px 14px;
 
     border:
         2px solid
@@ -920,7 +948,7 @@ input {
 
     border-radius: 17px;
 
-    background-color:
+    background:
         var(--crema-claro);
 
     color:
@@ -935,12 +963,14 @@ input {
 .opcion-pregunta:disabled {
 
     cursor: default;
+
+    opacity: 1;
 }
 
 
 .opcion-correcta {
 
-    background-color:
+    background:
         #D7F0C8 !important;
 
     border-color:
@@ -950,7 +980,7 @@ input {
 
 .opcion-incorrecta {
 
-    background-color:
+    background:
         #F8C9CD !important;
 
     border-color:
@@ -964,18 +994,18 @@ input {
 
     margin-top: 17px;
 
+    color:
+        var(--verde-oscuro);
+
     font-size: 14px;
 
     line-height: 1.5;
-
-    color:
-        var(--verde-oscuro);
 }
 
 
 .navegacion-preguntas {
 
-    margin-top: 20px;
+    margin-top: 18px;
 
     display: flex;
 
@@ -997,10 +1027,11 @@ input {
 
     border-radius: 50%;
 
-    background-color:
+    background:
         var(--verde);
 
-    color: white;
+    color:
+        white;
 
     font-size: 24px;
 
@@ -1010,7 +1041,7 @@ input {
 
 .flecha-pregunta:disabled {
 
-    opacity: 0.3;
+    opacity: 0.28;
 
     cursor: default;
 }
@@ -1027,19 +1058,46 @@ input {
 }
 
 
+.resultado-final {
+
+    padding:
+        12px 0;
+}
+
+
+.resultado-final p {
+
+    line-height: 1.6;
+}
+
+
 .puntaje-grande {
 
     margin:
-        20px 0;
+        18px 0;
 
     font-family:
         'Fredoka',
         sans-serif;
 
-    font-size: 46px;
+    font-size: 50px;
 
     color:
         var(--verde-oscuro);
+}
+
+
+.botones-final {
+
+    margin-top: 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    align-items: center;
 }
 
 
@@ -1063,8 +1121,8 @@ input {
 
         radial-gradient(
             circle at 10% 20%,
-            rgba(255, 233, 166, 0.85),
-            transparent 30%
+            rgba(255, 233, 166, 0.9),
+            transparent 31%
         ),
 
         var(--rosa-claro);
@@ -1079,39 +1137,39 @@ input {
 
 .ruleta-wrapper {
 
-    position: relative;
-
     width:
         min(
-            315px,
-            88vw
+            310px,
+            87vw
         );
 
     height:
         min(
-            315px,
-            88vw
+            310px,
+            87vw
         );
 
     margin:
-        0 auto 24px;
+        0 auto 26px;
+
+    position: relative;
 }
 
 
 .puntero {
 
+    width: 0;
+    height: 0;
+
     position: absolute;
 
-    top: -6px;
+    top: -5px;
     left: 50%;
 
-    z-index: 40;
+    z-index: 50;
 
     transform:
         translateX(-50%);
-
-    width: 0;
-    height: 0;
 
     border-left:
         17px solid transparent;
@@ -1120,25 +1178,25 @@ input {
         17px solid transparent;
 
     border-top:
-        31px solid
+        32px solid
         var(--rojo);
 }
 
 
 .flor-ruleta {
 
-    position: relative;
-
     width: 100%;
     height: 100%;
+
+    position: relative;
 
     transition:
         transform
         5s
         cubic-bezier(
-            0.17,
-            0.67,
-            0.19,
+            0.12,
+            0.65,
+            0.18,
             1
         );
 }
@@ -1146,23 +1204,27 @@ input {
 
 .petalo {
 
+    width: 104px;
+    height: 132px;
+
     position: absolute;
 
     top: 50%;
     left: 50%;
 
-    width: 105px;
-    height: 132px;
+    padding: 8px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    padding: 8px;
-
     border-radius:
         75px 75px 60px 60px;
+
+    box-shadow:
+        0 6px 14px
+        rgba(0, 0, 0, 0.08);
 
     font-family:
         'Fredoka',
@@ -1172,10 +1234,6 @@ input {
 
     color:
         #354537;
-
-    box-shadow:
-        0 6px 14px
-        rgba(0, 0, 0, 0.08);
 }
 
 
@@ -1189,107 +1247,122 @@ input {
 
 .petalo1 {
 
-    background-color:
+    background:
         var(--verde-claro);
 
     transform:
         translate(-50%, -50%)
         rotate(0deg)
-        translateY(-89px);
+        translateY(-87px);
 }
 
 
 .petalo2 {
 
-    background-color:
+    background:
         var(--amarillo);
 
     transform:
         translate(-50%, -50%)
         rotate(60deg)
-        translateY(-89px);
+        translateY(-87px);
 }
 
 
 .petalo3 {
 
-    background-color:
+    background:
         var(--verde-claro);
 
     transform:
         translate(-50%, -50%)
         rotate(120deg)
-        translateY(-89px);
+        translateY(-87px);
 }
 
 
 .petalo4 {
 
-    background-color:
+    background:
         var(--verde-claro);
 
     transform:
         translate(-50%, -50%)
         rotate(180deg)
-        translateY(-89px);
+        translateY(-87px);
 }
 
 
 .petalo5 {
 
-    background-color:
+    background:
         var(--amarillo);
 
     transform:
         translate(-50%, -50%)
         rotate(240deg)
-        translateY(-89px);
+        translateY(-87px);
 }
 
 
 .petalo6 {
 
-    background-color:
+    background:
         var(--rosa);
 
     transform:
         translate(-50%, -50%)
         rotate(300deg)
-        translateY(-89px);
+        translateY(-87px);
 }
 
 
 .petalo1 span {
-    transform: rotate(0deg);
+
+    transform:
+        rotate(0deg);
 }
 
 
 .petalo2 span {
-    transform: rotate(-60deg);
+
+    transform:
+        rotate(-60deg);
 }
 
 
 .petalo3 span {
-    transform: rotate(-120deg);
+
+    transform:
+        rotate(-120deg);
 }
 
 
 .petalo4 span {
-    transform: rotate(-180deg);
+
+    transform:
+        rotate(-180deg);
 }
 
 
 .petalo5 span {
-    transform: rotate(-240deg);
+
+    transform:
+        rotate(-240deg);
 }
 
 
 .petalo6 span {
-    transform: rotate(-300deg);
+
+    transform:
+        rotate(-300deg);
 }
 
 
 .centro-flor {
+
+    width: 92px;
+    height: 92px;
 
     position: absolute;
 
@@ -1297,9 +1370,6 @@ input {
     left: 50%;
 
     z-index: 20;
-
-    width: 94px;
-    height: 94px;
 
     transform:
         translate(-50%, -50%);
@@ -1315,10 +1385,10 @@ input {
 
     border-radius: 50%;
 
-    background-color:
+    background:
         var(--amarillo-claro);
 
-    font-size: 37px;
+    font-size: 36px;
 }
 
 
@@ -1327,22 +1397,25 @@ input {
     min-height: 49px;
 
     padding:
-        13px 30px;
+        13px 31px;
 
     border: none;
 
     border-radius: 30px;
 
-    background-color:
+    background:
         var(--verde);
 
-    color: white;
+    color:
+        white;
 
     font-family:
         'Fredoka',
         sans-serif;
 
-    font-size: 17px;
+    font-size: 18px;
+
+    font-weight: 600;
 
     cursor: pointer;
 }
@@ -1350,7 +1423,9 @@ input {
 
 .btn-ruleta:disabled {
 
-    opacity: 0.5;
+    opacity: 0.55;
+
+    cursor: default;
 }
 
 
@@ -1358,23 +1433,23 @@ input {
 
     width: 100%;
 
-    max-width: 550px;
+    max-width: 560px;
 
-    min-height: 70px;
+    min-height: 76px;
 
     margin:
         22px auto 0;
 
     padding:
-        17px 18px;
+        18px;
 
     border:
         2px dashed
         var(--amarillo);
 
-    border-radius: 23px;
+    border-radius: 24px;
 
-    background-color:
+    background:
         var(--crema);
 
     color:
@@ -1392,7 +1467,7 @@ input {
 
 
 /* =====================================
-   COMO CREAMOS EL BOT
+   SOBRE EL PROYECTO
 ===================================== */
 
 .como-section {
@@ -1400,23 +1475,16 @@ input {
     padding-top: 70px;
     padding-bottom: 70px;
 
-    background-color:
+    background:
         var(--crema-claro);
 }
 
 
 .titulo-como {
 
-    text-align: center;
-
-    margin-bottom: 30px;
+    margin-bottom: 28px;
 }
 
-
-
-/* =====================================
-   HISTORIA
-===================================== */
 
 .historia-card {
 
@@ -1424,13 +1492,12 @@ input {
 
     max-width: 900px;
 
-    margin:
-        0 auto 45px;
+    margin: 0 auto;
 
     padding:
-        27px 21px;
+        27px 20px;
 
-    background-color:
+    background:
         var(--crema);
 
     border:
@@ -1446,7 +1513,7 @@ input {
 
 .historia-card h3 {
 
-    margin-bottom: 20px;
+    margin-bottom: 19px;
 
     font-family:
         'Fredoka',
@@ -1463,142 +1530,24 @@ input {
 
     margin-bottom: 17px;
 
+    color:
+        var(--texto);
+
     font-size: 15px;
 
     line-height: 1.8;
-
-    color:
-        var(--texto);
 }
 
 
 .codigo-explicacion {
 
-    margin-top: 34px;
+    margin-top: 31px;
 
-    padding-top: 28px;
+    padding-top: 26px;
 
     border-top:
         2px dashed
         var(--verde-claro);
-}
-
-
-.codigo-explicacion h3 {
-
-    margin-bottom: 18px;
-}
-
-
-
-/* =====================================
-   TARJETAS DEL PROYECTO
-===================================== */
-
-.pasos {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr;
-
-    gap: 17px;
-}
-
-
-.paso {
-
-    position: relative;
-
-    padding:
-        28px 20px;
-
-    text-align: center;
-
-    border-radius: 26px;
-
-    box-shadow:
-        var(--sombra);
-}
-
-
-.paso:nth-child(1) {
-
-    background-color:
-        var(--rosa-claro);
-}
-
-
-.paso:nth-child(2) {
-
-    background-color:
-        #DDEFC9;
-}
-
-
-.paso:nth-child(3) {
-
-    background-color:
-        var(--amarillo-claro);
-}
-
-
-.paso:nth-child(4) {
-
-    background-color:
-        #F7D8D8;
-}
-
-
-.numero {
-
-    position: absolute;
-
-    top: 11px;
-    left: 11px;
-
-    width: 29px;
-    height: 29px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background-color:
-        var(--verde-oscuro);
-
-    color: white;
-}
-
-
-.paso-icono {
-
-    font-size: 43px;
-}
-
-
-.paso h3 {
-
-    margin:
-        11px 0 8px;
-
-    font-family:
-        'Fredoka',
-        sans-serif;
-
-    color:
-        var(--verde-oscuro);
-}
-
-
-.paso p {
-
-    font-size: 14px;
-
-    line-height: 1.6;
 }
 
 
@@ -1612,7 +1561,7 @@ input {
     padding:
         38px 0;
 
-    background-color:
+    background:
         var(--verde-oscuro);
 
     color:
@@ -1628,14 +1577,14 @@ input {
 
 .footer h3 {
 
-    margin-bottom: 8px;
-
-    color:
-        var(--amarillo-claro);
+    margin-bottom: 7px;
 
     font-family:
         'Fredoka',
         sans-serif;
+
+    color:
+        var(--amarillo-claro);
 }
 
 
@@ -1653,7 +1602,7 @@ input {
 
     flex-direction: column;
 
-    gap: 11px;
+    gap: 10px;
 }
 
 
@@ -1673,37 +1622,39 @@ input {
 
     .hero-card {
 
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-left: 15px;
+        padding-right: 15px;
+
+        padding-top: 175px;
     }
 
 
     .marulin-hero {
 
-        width: 260px;
+        width: 245px;
     }
 
 
     .hero-texto h1 {
 
-        font-size: 38px;
+        font-size: 37px;
     }
 
 
     .ruleta-wrapper {
 
         transform:
-            scale(0.92);
+            scale(0.93);
 
-        margin-top: -10px;
-        margin-bottom: 5px;
+        margin-top: -7px;
+        margin-bottom: 8px;
     }
 
 
     .historia-card {
 
         padding:
-            24px 17px;
+            23px 16px;
     }
 
 }
@@ -1711,12 +1662,19 @@ input {
 
 
 /* =====================================
-   TABLET Y COMPUTADORA
+   TABLET / COMPUTADORA
 ===================================== */
 
 @media (min-width: 768px) {
 
     .container {
+
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+
+    .menu-contenido {
 
         padding-left: 30px;
         padding-right: 30px;
@@ -1733,29 +1691,27 @@ input {
 
         position: static;
 
-        display: block;
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        gap: 4px;
 
         background:
             transparent;
+
+        border: none;
 
         box-shadow: none;
     }
 
 
-    .navbar ul {
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 5px;
-    }
-
-
-    .navbar li a {
+    .navbar a {
 
         padding:
-            10px 13px;
+            9px 12px;
 
         border-radius: 20px;
     }
@@ -1764,39 +1720,36 @@ input {
 
     /* INICIO */
 
-    .header {
+    .hero-container {
 
-        min-height: 90vh;
-
-        padding-top: 110px;
+        padding-top: 70px;
+        padding-bottom: 90px;
     }
 
 
     .hero-card {
 
-        max-width: 930px;
+        max-width: 940px;
 
-        min-height: 450px;
+        min-height: 445px;
 
-        margin-top: 30px;
+        margin-top: 20px;
 
         padding:
             60px
-            330px
+            340px
             60px
             55px;
 
-        align-items: flex-start;
+        display: flex;
 
-        justify-content: center;
+        align-items: center;
     }
 
 
     .hero-texto {
 
-        max-width: 560px;
-
-        text-align: center;
+        max-width: 550px;
     }
 
 
@@ -1814,13 +1767,11 @@ input {
 
     .marulin-hero {
 
-        width: 385px;
+        width: 390px;
 
         top: 50%;
-
         left: auto;
-
-        right: -105px;
+        right: -75px;
 
         transform:
             translateY(-50%);
@@ -1829,8 +1780,8 @@ input {
 
     .flor-hero {
 
-        top: -24px;
-        left: 30px;
+        top: -22px;
+        left: 28px;
 
         font-size: 40px;
     }
@@ -1844,7 +1795,9 @@ input {
         display: grid;
 
         grid-template-columns:
-            1.4fr 1fr auto;
+            1.4fr
+            1fr
+            auto;
 
         align-items: center;
     }
@@ -1854,6 +1807,14 @@ input {
 
         grid-template-columns:
             repeat(3, 1fr);
+    }
+
+
+    .botones-final {
+
+        flex-direction: row;
+
+        justify-content: center;
     }
 
 
@@ -1966,16 +1927,6 @@ input {
 
 
 
-    /* PROYECTO */
-
-    .pasos {
-
-        grid-template-columns:
-            repeat(4, 1fr);
-    }
-
-
-
     /* FOOTER */
 
     .links {
@@ -1984,7 +1935,7 @@ input {
 
         justify-content: center;
 
-        gap: 30px;
+        gap: 28px;
     }
 
 }

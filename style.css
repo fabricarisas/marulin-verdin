@@ -268,10 +268,10 @@ button {
 
     max-width: 540px;
 
-    margin-top: 105px;
+    margin-top: 70px;
 
     padding:
-        185px
+        145px
         21px
         34px;
 
@@ -303,15 +303,15 @@ button {
 
     width:
         min(
-            270px,
-            76vw
+            300px,
+            84vw
         );
 
     height: auto;
 
     position: absolute;
 
-    top: -105px;
+    top: -85px;
     left: 50%;
 
     transform:

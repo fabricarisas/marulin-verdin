@@ -1,5 +1,635 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+
+    /* =====================================
+       HABLA CON MARULIN
+    ====================================== */
+
+    const marulinHablaImagen =
+        document.getElementById("marulinHablaImagen");
+
+    const textoMarulin =
+        document.getElementById("textoMarulin");
+
+    const saludarMarulin =
+        document.getElementById("saludarMarulin");
+
+    const opcionesMarulin =
+        document.getElementById("opcionesMarulin");
+
+    const botonesCharla =
+        document.querySelectorAll(".boton-charla[data-charla]");
+
+    const indicadorHabla =
+        document.getElementById("indicadorHabla");
+
+
+    const imagenesMarulin = [
+        "images/maru1.png",
+        "images/maru2.png",
+        "images/maru3.png",
+        "images/maru4.png",
+        "images/maru5.png",
+        "images/maru6.png",
+        "images/maru7.png",
+        "images/maru8.png",
+        "images/maru9.png"
+    ];
+
+
+    const respuestasMarulin = {
+
+        consejo: [
+            "Antes de regar una planta, tocá la tierra. Si todavía está húmeda, esperá un poquito. Regar de más también puede hacerle mal.",
+            "No todas las plantas necesitan la misma cantidad de agua. Mirá cómo está la tierra antes de decidir si hay que regar.",
+            "Si una planta empieza a crecer muy inclinada hacia una ventana, probablemente está buscando más luz.",
+            "Cuando cambies una planta de maceta, asegurate de que la nueva tenga buen drenaje para que no se acumule demasiada agua.",
+            "Antes de pensar que una planta está triste por falta de agua, fijate también en la luz, la humedad y el aspecto de sus hojas."
+        ],
+
+        dato: [
+            "¿Sabías que las hojas tienen pequeñas aberturas llamadas estomas? Las plantas las usan para intercambiar gases y regular la pérdida de agua.",
+            "Dato curioso: el xilema funciona como una red de tuberías que transporta agua y minerales desde las raíces hacia otras partes de la planta.",
+            "¿Sabías que algunas plantas pueden crecer orientándose hacia la luz? Ese fenómeno se llama fototropismo.",
+            "Las raíces tienen pequeños pelos absorbentes que aumentan muchísimo la superficie con la que pueden tomar agua del suelo.",
+            "Las plantas también pierden agua en forma de vapor. Ese proceso se llama transpiración."
+        ],
+
+        chamuyo: [
+            "¿Sos ChatGPT? Porque tenés todas las respuestas que estaba buscando.",
+            "Estás más fuerte que el dólar blue.",
+            "Ni Francella en sus mejores épocas tenía el timing que tenés vos para hacerme sonreír.",
+            "Vine hasta acá para decirte algo inteligente, pero te juro que me miraste y me agarró un delay mental digno de las compus del gobierno.",
+            "Cantame truco, que con vos quiero todo.",
+            "Soy malísima en inglés. Confundí un past simple con un futuro con vos.",
+            "¿Tenés papel? Es que te vi y me cagué enamorando.",
+            "Sos como una prueba de historia: te veo y no sé qué poner de lo nerviosa que estoy.",
+            "Te hacés la linda y sos hermosa.",
+            "Los japoneses se mueren si ven semejante bomba como vos."
+        ],
+
+        favorita: [
+            "Ufff, es difícil elegir, pero creo que mi favorita es el potus. Es hermoso, resistente y queda lindo en un montón de lugares. Pero no se lo cuentes a las otras plantas.",
+            "Me gustan muchísimas, pero tengo debilidad por el potus. Sus hojas son preciosas y además es una planta bastante amigable para empezar a cuidar."
+        ],
+
+        lindo: [
+            "Te voy a decir algo lindo: crecer lleva tiempo. Las plantas no se apuran, y aun así un día te sorprenden con una hoja nueva. Vos también podés darte tiempo.",
+            "Gracias por venir a conocerme. Si hoy aprendiste aunque sea una cosita nueva, entonces mi día ya fue un poquito más verde.",
+            "Las cosas lindas necesitan cuidado, paciencia y tiempo. Las plantas lo saben muy bien, y creo que nosotros también podemos aprender eso de ellas.",
+            "Tu curiosidad también es una forma de crecer. Seguí preguntando, probando y aprendiendo cosas nuevas."
+        ],
+
+        recomendar: [
+            "Si recién empezás con las plantas, yo te recomendaría un potus. Es bastante resistente y te permite aprender sin complicarte demasiado.",
+            "Si sos de olvidarte un poquito del riego, una sansevieria puede ser una muy buena compañera porque suele tolerar bastante bien los descuidos.",
+            "Si tenés un lugar con mucha luz y querés algo pequeño, podés probar con una suculenta. Eso sí: cuidado con regarla de más.",
+            "Si te gustan las plantas aromáticas y tenés buena luz, podrías probar con menta. Además de verse linda, tiene un aroma genial."
+        ]
+    };
+
+
+    let intervaloMarulin = null;
+    let ultimoIndiceMarulin = -1;
+    let vocesDisponibles = [];
+
+
+    function cargarVocesMarulin() {
+
+        if (!("speechSynthesis" in window)) {
+            return;
+        }
+
+        vocesDisponibles =
+            window.speechSynthesis.getVoices();
+    }
+
+
+    cargarVocesMarulin();
+
+
+    if ("speechSynthesis" in window) {
+
+        window.speechSynthesis.addEventListener(
+            "voiceschanged",
+            cargarVocesMarulin
+        );
+    }
+
+
+    function obtenerVozMarulin() {
+
+        const vozArgentina =
+            vocesDisponibles.find(
+                voz =>
+                    voz.lang &&
+                    voz.lang.toLowerCase().startsWith("es-ar")
+            );
+
+        if (vozArgentina) {
+            return vozArgentina;
+        }
+
+
+        const vozEspanol =
+            vocesDisponibles.find(
+                voz =>
+                    voz.lang &&
+                    voz.lang.toLowerCase().startsWith("es")
+            );
+
+        return vozEspanol || null;
+    }
+
+
+    function elegirAleatorio(lista) {
+
+        return lista[
+            Math.floor(
+                Math.random() * lista.length
+            )
+        ];
+    }
+
+
+    function cambiarImagenMarulin() {
+
+        if (!marulinHablaImagen) {
+            return;
+        }
+
+        let indice;
+
+        do {
+
+            indice =
+                Math.floor(
+                    Math.random() * imagenesMarulin.length
+                );
+
+        } while (
+            indice === ultimoIndiceMarulin &&
+            imagenesMarulin.length > 1
+        );
+
+
+        ultimoIndiceMarulin = indice;
+
+        marulinHablaImagen.src =
+            imagenesMarulin[indice];
+    }
+
+
+    function empezarAnimacionMarulin(imagenFija = null) {
+
+        if (!marulinHablaImagen) {
+            return;
+        }
+
+        clearInterval(intervaloMarulin);
+
+        marulinHablaImagen.classList.add(
+            "hablando"
+        );
+
+        indicadorHabla?.classList.remove(
+            "oculto-chat"
+        );
+
+        if (imagenFija) {
+
+            marulinHablaImagen.src =
+                imagenFija;
+
+            intervaloMarulin = null;
+            return;
+        }
+
+        cambiarImagenMarulin();
+
+        intervaloMarulin =
+            setInterval(
+                cambiarImagenMarulin,
+                420
+            );
+    }
+
+
+    function detenerAnimacionMarulin() {
+
+        clearInterval(intervaloMarulin);
+
+        intervaloMarulin = null;
+
+        marulinHablaImagen?.classList.remove(
+            "hablando"
+        );
+
+        indicadorHabla?.classList.add(
+            "oculto-chat"
+        );
+
+        if (marulinHablaImagen) {
+
+            marulinHablaImagen.src =
+                "images/maru5.png";
+        }
+    }
+
+
+    function bloquearBotonesMarulin(bloquear) {
+
+        if (saludarMarulin) {
+            saludarMarulin.disabled = bloquear;
+        }
+
+        botonesCharla.forEach(
+            boton => {
+                boton.disabled = bloquear;
+            }
+        );
+    }
+
+
+    /* =====================================
+       EFECTO DE VOZ ROBOTICA DE MARULIN
+
+       speechSynthesis limita el pitch a 2.0.
+       Por eso dejamos la voz en el maximo y
+       agregamos bips/chirridos electronicos muy
+       cortitos para que el resultado suene mucho
+       mas agudo y robotico sin usar audios externos.
+    ====================================== */
+
+    function sonidoRobotMarulin() {
+
+        const AudioContexto =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        if (!AudioContexto) {
+            return Promise.resolve();
+        }
+
+        try {
+
+            const audioCtx =
+                new AudioContexto();
+
+            const crearBip =
+                (inicio, frecuencia, duracion = 0.065) => {
+
+                    const oscilador =
+                        audioCtx.createOscillator();
+
+                    const volumen =
+                        audioCtx.createGain();
+
+                    oscilador.type = "square";
+
+                    oscilador.frequency.setValueAtTime(
+                        frecuencia,
+                        audioCtx.currentTime + inicio
+                    );
+
+                    volumen.gain.setValueAtTime(
+                        0.0001,
+                        audioCtx.currentTime + inicio
+                    );
+
+                    volumen.gain.exponentialRampToValueAtTime(
+                        0.045,
+                        audioCtx.currentTime + inicio + 0.008
+                    );
+
+                    volumen.gain.exponentialRampToValueAtTime(
+                        0.0001,
+                        audioCtx.currentTime + inicio + duracion
+                    );
+
+                    oscilador.connect(volumen);
+                    volumen.connect(audioCtx.destination);
+
+                    oscilador.start(
+                        audioCtx.currentTime + inicio
+                    );
+
+                    oscilador.stop(
+                        audioCtx.currentTime + inicio + duracion + 0.01
+                    );
+                };
+
+            /* BIP-BIP-BIP mucho mas agudo que antes */
+            crearBip(0.00, 1900);
+            crearBip(0.075, 2500);
+            crearBip(0.150, 3150);
+
+            return new Promise(
+                resolve => {
+                    setTimeout(
+                        () => {
+                            audioCtx.close().catch(() => {});
+                            resolve();
+                        },
+                        255
+                    );
+                }
+            );
+        }
+
+        catch (error) {
+            return Promise.resolve();
+        }
+    }
+
+
+    let efectoRobotMarulin = null;
+
+
+    function iniciarEfectoRobotMarulin() {
+
+        detenerEfectoRobotMarulin();
+
+        const AudioContexto =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        if (!AudioContexto) {
+            return;
+        }
+
+        try {
+
+            const audioCtx =
+                new AudioContexto();
+
+            let paso = 0;
+
+            const frecuencias = [
+                2350,
+                2850,
+                3300,
+                2600
+            ];
+
+            const emitirChirrido = () => {
+
+                if (audioCtx.state === "closed") {
+                    return;
+                }
+
+                const ahora =
+                    audioCtx.currentTime;
+
+                const oscilador =
+                    audioCtx.createOscillator();
+
+                const volumen =
+                    audioCtx.createGain();
+
+                oscilador.type =
+                    paso % 2 === 0
+                        ? "square"
+                        : "sawtooth";
+
+                oscilador.frequency.setValueAtTime(
+                    frecuencias[paso % frecuencias.length],
+                    ahora
+                );
+
+                oscilador.frequency.exponentialRampToValueAtTime(
+                    frecuencias[(paso + 1) % frecuencias.length],
+                    ahora + 0.045
+                );
+
+                volumen.gain.setValueAtTime(
+                    0.0001,
+                    ahora
+                );
+
+                volumen.gain.exponentialRampToValueAtTime(
+                    0.007,
+                    ahora + 0.006
+                );
+
+                volumen.gain.exponentialRampToValueAtTime(
+                    0.0001,
+                    ahora + 0.055
+                );
+
+                oscilador.connect(volumen);
+                volumen.connect(audioCtx.destination);
+
+                oscilador.start(ahora);
+                oscilador.stop(ahora + 0.06);
+
+                paso += 1;
+            };
+
+            /* Sonido electronico muy bajito debajo de la voz */
+            emitirChirrido();
+
+            const intervalo =
+                setInterval(
+                    emitirChirrido,
+                    175
+                );
+
+            efectoRobotMarulin = {
+                audioCtx,
+                intervalo
+            };
+        }
+
+        catch (error) {
+            efectoRobotMarulin = null;
+        }
+    }
+
+
+    function detenerEfectoRobotMarulin() {
+
+        if (!efectoRobotMarulin) {
+            return;
+        }
+
+        clearInterval(
+            efectoRobotMarulin.intervalo
+        );
+
+        efectoRobotMarulin.audioCtx
+            .close()
+            .catch(() => {});
+
+        efectoRobotMarulin = null;
+    }
+
+
+    async function hablarMarulin(
+        texto,
+        alTerminar = null,
+        imagenFija = null
+    ) {
+
+        if (textoMarulin) {
+            textoMarulin.textContent = texto;
+        }
+
+        empezarAnimacionMarulin(
+            imagenFija
+        );
+
+        bloquearBotonesMarulin(true);
+
+
+        if (!("speechSynthesis" in window)) {
+
+            detenerAnimacionMarulin();
+            bloquearBotonesMarulin(false);
+
+            if (alTerminar) {
+                alTerminar();
+            }
+
+            return;
+        }
+
+
+        window.speechSynthesis.cancel();
+
+        await sonidoRobotMarulin();
+
+
+        const mensaje =
+            new SpeechSynthesisUtterance(texto);
+
+
+        const vozElegida =
+            obtenerVozMarulin();
+
+
+        if (vozElegida) {
+
+            mensaje.voice = vozElegida;
+            mensaje.lang = vozElegida.lang;
+        }
+
+        else {
+
+            mensaje.lang = "es-AR";
+        }
+
+
+        /*
+           VOZ DE MARULÍN
+
+           - pitch al MAXIMO permitido por el navegador
+           - misma velocidad que antes
+           - bips iniciales mucho mas agudos
+           - chirridos electronicos suaves mientras habla
+
+           speechSynthesis permite pitch hasta 2.0.
+        */
+
+        mensaje.rate = 1.52;
+        mensaje.pitch = 2.0;
+        mensaje.volume = 1;
+
+
+        const terminar = () => {
+
+            detenerEfectoRobotMarulin();
+            detenerAnimacionMarulin();
+            bloquearBotonesMarulin(false);
+
+            if (alTerminar) {
+                alTerminar();
+            }
+        };
+
+
+        mensaje.onend = terminar;
+        mensaje.onerror = terminar;
+
+
+        iniciarEfectoRobotMarulin();
+
+        window.speechSynthesis.speak(
+            mensaje
+        );
+    }
+
+
+    saludarMarulin?.addEventListener(
+
+        "click",
+
+        () => {
+
+            const saludo =
+                "¡Holaaa! Estoy muy bien y súper feliz de que hayas venido a conocerme. Soy Marulín Verdín y me encanta hablar de plantas. ¿Qué querés preguntarme?";
+
+
+            hablarMarulin(
+                saludo,
+                () => {
+
+                    saludarMarulin.classList.add(
+                        "oculto-chat"
+                    );
+
+                    opcionesMarulin.classList.remove(
+                        "oculto-chat"
+                    );
+                }
+            );
+        }
+    );
+
+
+    botonesCharla.forEach(
+
+        boton => {
+
+            boton.addEventListener(
+
+                "click",
+
+                () => {
+
+                    const categoria =
+                        boton.dataset.charla;
+
+
+                    const lista =
+                        respuestasMarulin[categoria];
+
+
+                    if (!lista) {
+                        return;
+                    }
+
+
+                    const respuesta =
+                        elegirAleatorio(lista);
+
+
+                    const imagenFija =
+                        categoria === "chamuyo"
+                            ? "images/maru2.png"
+                            : null;
+
+
+                    hablarMarulin(
+                        respuesta,
+                        null,
+                        imagenFija
+                    );
+                }
+            );
+        }
+    );
+
     /* =====================================
        ELEMENTOS
     ====================================== */
@@ -1639,6 +2269,931 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+    );
+
+
+    /* =====================================
+       ¿QUE MARULIN SOS?
+    ====================================== */
+
+    const testMarulinInicio =
+        document.getElementById("testMarulinInicio");
+
+    const testMarulinPreguntas =
+        document.getElementById("testMarulinPreguntas");
+
+    const testMarulinResultado =
+        document.getElementById("testMarulinResultado");
+
+    const btnComenzarTestMarulin =
+        document.getElementById("btnComenzarTestMarulin");
+
+    const btnRepetirTestMarulin =
+        document.getElementById("btnRepetirTestMarulin");
+
+    const testMarulinNumero =
+        document.getElementById("testMarulinNumero");
+
+    const testMarulinProgreso =
+        document.getElementById("testMarulinProgreso");
+
+    const testMarulinPregunta =
+        document.getElementById("testMarulinPregunta");
+
+    const testMarulinOpciones =
+        document.getElementById("testMarulinOpciones");
+
+    const testMarulinImagenResultado =
+        document.getElementById("testMarulinImagenResultado");
+
+    const testMarulinTituloResultado =
+        document.getElementById("testMarulinTituloResultado");
+
+    const testMarulinTextoResultado =
+        document.getElementById("testMarulinTextoResultado");
+
+
+    const preguntasQueMarulin = [
+
+        {
+            pregunta: "Es sábado a la noche, ¿qué plan elegís?",
+            opciones: [
+                {
+                    texto: "Busco alguna joda o juntada para ir, tiro alguna notita tipo ‘¿y hoy???’.",
+                    tipo: "bolichero"
+                },
+                {
+                    texto: "Me junto con mi pareja o busco algún chamuyo mío de Instagram para hacer algo, bien de gato.",
+                    tipo: "chamuyero"
+                },
+                {
+                    texto: "Elijo una peli para ver y me duermo a los dos segundos.",
+                    tipo: "dormilon"
+                },
+                {
+                    texto: "Hago algo tranqui con mis amigos: un lomito con un truco, un UNO o un chinchón. Chill.",
+                    tipo: "chill"
+                }
+            ]
+        },
+
+        {
+            pregunta: "Te escribe alguien que te gusta. ¿Qué hacés?",
+            opciones: [
+                {
+                    texto: "Me la/lo chamuyo. Si pica, pica.",
+                    tipo: "chamuyero"
+                },
+                {
+                    texto: "Le pregunto si salimos a algún lado hoy.",
+                    tipo: "bolichero"
+                },
+                {
+                    texto: "Le contesté tarde porque me quedé dormido. Lpm, qué gil que soy, las malas me rodean.",
+                    tipo: "dormilon"
+                },
+                {
+                    texto: "Le saco charla normal.",
+                    tipo: "chill"
+                }
+            ]
+        },
+
+        {
+            pregunta: "En una juntada sos el que...",
+            opciones: [
+                {
+                    texto: "Seguramente encuentra a alguien para chamuyarse toda la noche.",
+                    tipo: "chamuyero"
+                },
+                {
+                    texto: "Está tratando de convencer a todos de salir después y encima después consigue un after.",
+                    tipo: "bolichero"
+                },
+                {
+                    texto: "Se va temprano porque le agarró sueño o lo encuentran tirado durmiéndose.",
+                    tipo: "dormilon"
+                },
+                {
+                    texto: "Está charlando con un grupito tranqui, sin preocuparse mucho.",
+                    tipo: "chill"
+                }
+            ]
+        },
+
+        {
+            pregunta: "Mañana es feriado y no tenés que hacer nada. ¿Qué hacés?",
+            opciones: [
+                {
+                    texto: "Organizo algún plan con algún chamuyo de por ahí.",
+                    tipo: "chamuyero"
+                },
+                {
+                    texto: "YYYYY... busco alguna jodita o juntada para salir, si total mañana no hay que hacer nada.",
+                    tipo: "bolichero"
+                },
+                {
+                    texto: "Aprovecho y me duermo todo el día hasta que en algún horario me despierte.",
+                    tipo: "dormilon"
+                },
+                {
+                    texto: "Me despierto a cualquier hora, capaz juego un rato al Minecraft o al LoL y después veo de organizar alguna juntada y tomar unos matesitos.",
+                    tipo: "chill"
+                }
+            ]
+        },
+
+        {
+            pregunta: "¿Qué signo sos?",
+            opciones: [
+                {
+                    texto: "Géminis, Libra o Escorpio.",
+                    tipo: "chamuyero"
+                },
+                {
+                    texto: "Aries, Leo o Sagitario.",
+                    tipo: "bolichero"
+                },
+                {
+                    texto: "Tauro, Cáncer o Piscis.",
+                    tipo: "dormilon"
+                },
+                {
+                    texto: "Virgo, Capricornio o Acuario.",
+                    tipo: "chill"
+                }
+            ]
+        },
+
+        {
+            pregunta: "Tu celu está en 2% y todavía faltan 3 horas para volver a tu casa.",
+            opciones: [
+                {
+                    texto: "Guardo batería por si me escribe ella/él...",
+                    tipo: "chamuyero"
+                },
+                {
+                    texto: "Lo sigo usando. Dios proveerá.",
+                    tipo: "bolichero"
+                },
+                {
+                    texto: "Le aviso a mi mamá y desaparezco. Cuando llegue lo pongo a cargar mientras duermo.",
+                    tipo: "dormilon"
+                },
+                {
+                    texto: "Modo ahorro y ya fue.",
+                    tipo: "chill"
+                }
+            ]
+        },
+
+        {
+            pregunta: "¿Cuál es tu milanesa favorita?",
+            opciones: [
+                {
+                    texto: "Milanesa napolitana.",
+                    tipo: "chamuyero"
+                },
+                {
+                    texto: "Milanesa a caballo.",
+                    tipo: "bolichero"
+                },
+                {
+                    texto: "Milanesa con fideos con crema.",
+                    tipo: "dormilon"
+                },
+                {
+                    texto: "Milanesa simple con puré de papa.",
+                    tipo: "chill"
+                }
+            ]
+        }
+
+    ];
+
+
+    const resultadosQueMarulin = {
+
+        chamuyero: {
+            titulo: "💘 Marulín Chamuyero",
+            imagen: "images/maru2.png",
+            texto: "Tenés una frase para cada situación. Si hay una mínima posibilidad de chamuyo, vos ya la viste antes que todos. Si pica, pica."
+        },
+
+        bolichero: {
+            titulo: "🪩 Marulín Bolichero",
+            imagen: "images/maru5.png",
+            texto: "Para vos siempre puede aparecer una jodita más. Sos de los que dicen ‘vamos un rato’ y terminan encontrando un after."
+        },
+
+        dormilon: {
+            titulo: "💤 Marulín Dormilón",
+            imagen: "images/maru9.png",
+            texto: "Podrías conquistar el mundo, pero justo te agarró sueño. Cualquier superficie medianamente cómoda puede convertirse en una cama."
+        },
+
+        chill: {
+            titulo: "😎 Marulín de Chill",
+            imagen: "images/maru6.png",
+            texto: "Cero drama y cero apuro. Unos mates, un lomito, un jueguito o una juntada tranqui y ya estás hecho. Vemos qué pinta."
+        }
+
+    };
+
+
+    let indicePreguntaMarulin = 0;
+
+    let puntajesQueMarulin = {
+        chamuyero: 0,
+        bolichero: 0,
+        dormilon: 0,
+        chill: 0
+    };
+
+    let ultimaRespuestaMarulin = null;
+
+
+    function reiniciarTestMarulin() {
+
+        indicePreguntaMarulin = 0;
+
+        ultimaRespuestaMarulin = null;
+
+        puntajesQueMarulin = {
+            chamuyero: 0,
+            bolichero: 0,
+            dormilon: 0,
+            chill: 0
+        };
+    }
+
+
+    function mostrarPreguntaMarulin() {
+
+        const item =
+            preguntasQueMarulin[indicePreguntaMarulin];
+
+        if (!item) {
+            mostrarResultadoMarulin();
+            return;
+        }
+
+        if (testMarulinNumero) {
+            testMarulinNumero.textContent =
+                indicePreguntaMarulin + 1;
+        }
+
+        if (testMarulinProgreso) {
+            testMarulinProgreso.style.width =
+                `${((indicePreguntaMarulin + 1) / preguntasQueMarulin.length) * 100}%`;
+        }
+
+        if (testMarulinPregunta) {
+            testMarulinPregunta.textContent =
+                item.pregunta;
+        }
+
+        if (!testMarulinOpciones) {
+            return;
+        }
+
+        testMarulinOpciones.innerHTML = "";
+
+        item.opciones.forEach(
+            opcion => {
+
+                const boton =
+                    document.createElement("button");
+
+                boton.type = "button";
+                boton.className = "test-marulin-opcion";
+                boton.textContent = opcion.texto;
+
+                boton.addEventListener(
+                    "click",
+                    () => {
+
+                        puntajesQueMarulin[opcion.tipo] += 1;
+                        ultimaRespuestaMarulin = opcion.tipo;
+
+                        indicePreguntaMarulin += 1;
+
+                        if (
+                            indicePreguntaMarulin >=
+                            preguntasQueMarulin.length
+                        ) {
+                            mostrarResultadoMarulin();
+                        }
+                        else {
+                            mostrarPreguntaMarulin();
+                        }
+                    }
+                );
+
+                testMarulinOpciones.appendChild(boton);
+            }
+        );
+    }
+
+
+    function obtenerGanadorMarulin() {
+
+        const maximo =
+            Math.max(...Object.values(puntajesQueMarulin));
+
+        const empatados =
+            Object.keys(puntajesQueMarulin)
+                .filter(
+                    tipo =>
+                        puntajesQueMarulin[tipo] === maximo
+                );
+
+        if (
+            ultimaRespuestaMarulin &&
+            empatados.includes(ultimaRespuestaMarulin)
+        ) {
+            return ultimaRespuestaMarulin;
+        }
+
+        return empatados[0];
+    }
+
+
+    function mostrarResultadoMarulin() {
+
+        const ganador =
+            obtenerGanadorMarulin();
+
+        const resultado =
+            resultadosQueMarulin[ganador];
+
+        testMarulinPreguntas?.classList.add(
+            "test-marulin-oculto"
+        );
+
+        testMarulinResultado?.classList.remove(
+            "test-marulin-oculto"
+        );
+
+        if (testMarulinImagenResultado) {
+            testMarulinImagenResultado.src =
+                resultado.imagen;
+        }
+
+        if (testMarulinTituloResultado) {
+            testMarulinTituloResultado.textContent =
+                resultado.titulo;
+        }
+
+        if (testMarulinTextoResultado) {
+            testMarulinTextoResultado.textContent =
+                resultado.texto;
+        }
+    }
+
+
+    btnComenzarTestMarulin?.addEventListener(
+        "click",
+        () => {
+
+            reiniciarTestMarulin();
+
+            testMarulinInicio?.classList.add(
+                "test-marulin-oculto"
+            );
+
+            testMarulinResultado?.classList.add(
+                "test-marulin-oculto"
+            );
+
+            testMarulinPreguntas?.classList.remove(
+                "test-marulin-oculto"
+            );
+
+            mostrarPreguntaMarulin();
+        }
+    );
+
+
+    btnRepetirTestMarulin?.addEventListener(
+        "click",
+        () => {
+
+            reiniciarTestMarulin();
+
+            testMarulinResultado?.classList.add(
+                "test-marulin-oculto"
+            );
+
+            testMarulinPreguntas?.classList.remove(
+                "test-marulin-oculto"
+            );
+
+            mostrarPreguntaMarulin();
+        }
+    );
+
+
+
+    /* =====================================
+       SELFIE DE LA FERIA
+    ====================================== */
+
+    const selfieOpciones =
+        document.getElementById("selfieOpciones");
+
+    const selfieVideo =
+        document.getElementById("selfieVideo");
+
+    const selfieMarco =
+        document.getElementById("selfieMarco");
+
+    const selfiePlaceholder =
+        document.getElementById("selfiePlaceholder");
+
+    const selfieEstado =
+        document.getElementById("selfieEstado");
+
+    const btnActivarCamara =
+        document.getElementById("btnActivarCamara");
+
+    const btnCambiarCamara =
+        document.getElementById("btnCambiarCamara");
+
+    const btnSacarSelfie =
+        document.getElementById("btnSacarSelfie");
+
+    const btnCerrarCamara =
+        document.getElementById("btnCerrarCamara");
+
+    const selfieCanvas =
+        document.getElementById("selfieCanvas");
+
+    const selfieResultado =
+        document.getElementById("selfieResultado");
+
+    const selfieFotoFinal =
+        document.getElementById("selfieFotoFinal");
+
+    const btnRepetirSelfie =
+        document.getElementById("btnRepetirSelfie");
+
+    const btnGuardarSelfie =
+        document.getElementById("btnGuardarSelfie");
+
+
+    const marcosSelfie = [
+
+        {
+            nombre: "Selfie con Pachorra",
+            archivo: "images/selfies/pachorra.png"
+        },
+
+        {
+            nombre: "Selfie con La Mona",
+            archivo: "images/selfies/cuarteto-1.png"
+        },
+
+        {
+            nombre: "Selfie con Marulín",
+            archivo: "images/selfies/marulinmarco.png"
+        },
+
+        {
+            nombre: "Selfie con El Potro",
+            archivo: "images/selfies/cuarteto-2.png"
+        },
+
+        {
+            nombre: "Selfie con la Paloma Aura",
+            archivo: "images/selfies/paloma.png"
+        },
+
+        {
+            nombre: "Selfie con de hecho 🤓☝️",
+            archivo: "images/selfies/gatito-intelectual.png"
+        },
+
+        {
+            nombre: "Selfie con el Chico Tímido",
+            archivo: "images/selfies/chico.png"
+        },
+
+        {
+            nombre: "Selfie con Gatito Tonto",
+            archivo: "images/selfies/gatito-loco.png"
+        }
+
+    ];
+
+
+    let marcoSelfieActual =
+        marcosSelfie[0].archivo;
+
+    let streamSelfie = null;
+    let camaraSelfie = "user";
+    let selfieDataUrl = null;
+
+
+    function cargarOpcionesSelfie() {
+
+        if (!selfieOpciones) {
+            return;
+        }
+
+        selfieOpciones.innerHTML = "";
+
+        marcosSelfie.forEach(
+            (marco, indice) => {
+
+                const boton =
+                    document.createElement("button");
+
+                boton.type = "button";
+                boton.className =
+                    "selfie-opcion" +
+                    (indice === 0 ? " activa" : "");
+
+                boton.innerHTML =
+                    `<img src="${marco.archivo}" alt="${marco.nombre}">` +
+                    `<span>${marco.nombre}</span>`;
+
+                boton.addEventListener(
+                    "click",
+                    () => {
+
+                        marcoSelfieActual = marco.archivo;
+
+                        if (selfieMarco) {
+                            selfieMarco.src = marco.archivo;
+                        }
+
+                        selfieOpciones
+                            .querySelectorAll(".selfie-opcion")
+                            .forEach(
+                                item =>
+                                    item.classList.remove("activa")
+                            );
+
+                        boton.classList.add("activa");
+
+                        selfieResultado?.classList.add(
+                            "selfie-oculto"
+                        );
+
+                        selfieDataUrl = null;
+                    }
+                );
+
+                selfieOpciones.appendChild(boton);
+            }
+        );
+    }
+
+
+    function detenerCamaraSelfie() {
+
+        if (streamSelfie) {
+
+            streamSelfie
+                .getTracks()
+                .forEach(track => track.stop());
+
+            streamSelfie = null;
+        }
+
+        if (selfieVideo) {
+            selfieVideo.srcObject = null;
+        }
+
+        selfiePlaceholder?.classList.remove(
+            "selfie-placeholder-oculto"
+        );
+
+        btnCambiarCamara?.classList.add("selfie-oculto");
+        btnSacarSelfie?.classList.add("selfie-oculto");
+        btnCerrarCamara?.classList.add("selfie-oculto");
+
+        if (btnActivarCamara) {
+            btnActivarCamara.classList.remove("selfie-oculto");
+        }
+    }
+
+
+    async function iniciarCamaraSelfie() {
+
+        if (
+            !navigator.mediaDevices ||
+            !navigator.mediaDevices.getUserMedia
+        ) {
+
+            if (selfieEstado) {
+                selfieEstado.textContent =
+                    "Este navegador no permite usar la cámara desde la página.";
+            }
+
+            return;
+        }
+
+        detenerCamaraSelfie();
+
+        try {
+
+            streamSelfie =
+                await navigator.mediaDevices.getUserMedia({
+                    audio: false,
+                    video: {
+                        facingMode: {
+                            ideal: camaraSelfie
+                        }
+                    }
+                });
+
+            if (selfieVideo) {
+
+                selfieVideo.srcObject = streamSelfie;
+
+                await selfieVideo.play();
+            }
+
+            selfiePlaceholder?.classList.add(
+                "selfie-placeholder-oculto"
+            );
+
+            btnActivarCamara?.classList.add("selfie-oculto");
+            btnCambiarCamara?.classList.remove("selfie-oculto");
+            btnSacarSelfie?.classList.remove("selfie-oculto");
+            btnCerrarCamara?.classList.remove("selfie-oculto");
+
+            if (selfieEstado) {
+                selfieEstado.textContent =
+                    "¡Listo! Acomodate dentro del marco y sacá la foto 📸";
+            }
+        }
+
+        catch (error) {
+
+            if (selfieEstado) {
+                selfieEstado.textContent =
+                    "No pude abrir la cámara. Revisá el permiso de cámara del navegador e intentá de nuevo.";
+            }
+        }
+    }
+
+
+    function cargarImagenSelfie(src) {
+
+        return new Promise(
+            (resolve, reject) => {
+
+                const imagen = new Image();
+
+                imagen.onload =
+                    () => resolve(imagen);
+
+                imagen.onerror = reject;
+
+                imagen.src = src;
+            }
+        );
+    }
+
+
+    function dibujarVideoCubriendo(
+        contexto,
+        video,
+        anchoDestino,
+        altoDestino,
+        espejar
+    ) {
+
+        const anchoVideo = video.videoWidth;
+        const altoVideo = video.videoHeight;
+
+        if (!anchoVideo || !altoVideo) {
+            return false;
+        }
+
+        const proporcionVideo =
+            anchoVideo / altoVideo;
+
+        const proporcionDestino =
+            anchoDestino / altoDestino;
+
+        let sx = 0;
+        let sy = 0;
+        let sw = anchoVideo;
+        let sh = altoVideo;
+
+        if (proporcionVideo > proporcionDestino) {
+
+            sw = altoVideo * proporcionDestino;
+            sx = (anchoVideo - sw) / 2;
+        }
+        else {
+
+            sh = anchoVideo / proporcionDestino;
+            sy = (altoVideo - sh) / 2;
+        }
+
+        contexto.save();
+
+        if (espejar) {
+            contexto.translate(anchoDestino, 0);
+            contexto.scale(-1, 1);
+        }
+
+        contexto.drawImage(
+            video,
+            sx,
+            sy,
+            sw,
+            sh,
+            0,
+            0,
+            anchoDestino,
+            altoDestino
+        );
+
+        contexto.restore();
+
+        return true;
+    }
+
+
+    async function sacarSelfieMarulin() {
+
+        if (
+            !selfieCanvas ||
+            !selfieVideo ||
+            !streamSelfie
+        ) {
+            return;
+        }
+
+        const contexto =
+            selfieCanvas.getContext("2d");
+
+        if (!contexto) {
+            return;
+        }
+
+        contexto.clearRect(
+            0,
+            0,
+            selfieCanvas.width,
+            selfieCanvas.height
+        );
+
+        const pudoDibujar =
+            dibujarVideoCubriendo(
+                contexto,
+                selfieVideo,
+                selfieCanvas.width,
+                selfieCanvas.height,
+                camaraSelfie === "user"
+            );
+
+        if (!pudoDibujar) {
+
+            if (selfieEstado) {
+                selfieEstado.textContent =
+                    "Esperá un segundo a que cargue la cámara y probá de nuevo.";
+            }
+
+            return;
+        }
+
+        try {
+
+            const marco =
+                await cargarImagenSelfie(marcoSelfieActual);
+
+            contexto.drawImage(
+                marco,
+                0,
+                0,
+                selfieCanvas.width,
+                selfieCanvas.height
+            );
+
+            selfieDataUrl =
+                selfieCanvas.toDataURL("image/png");
+
+            if (selfieFotoFinal) {
+                selfieFotoFinal.src = selfieDataUrl;
+            }
+
+            selfieResultado?.classList.remove(
+                "selfie-oculto"
+            );
+
+            if (selfieEstado) {
+                selfieEstado.textContent =
+                    "¡Selfie lista! Podés guardarla o sacar otra 💚";
+            }
+
+            selfieResultado?.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
+        }
+
+        catch (error) {
+
+            if (selfieEstado) {
+                selfieEstado.textContent =
+                    "No pude cargar el marco. Revisá que las imágenes estén dentro de images/selfies/.";
+            }
+        }
+    }
+
+
+    cargarOpcionesSelfie();
+
+
+    btnActivarCamara?.addEventListener(
+        "click",
+        iniciarCamaraSelfie
+    );
+
+
+    btnCambiarCamara?.addEventListener(
+        "click",
+        async () => {
+
+            camaraSelfie =
+                camaraSelfie === "user"
+                    ? "environment"
+                    : "user";
+
+            await iniciarCamaraSelfie();
+        }
+    );
+
+
+    btnSacarSelfie?.addEventListener(
+        "click",
+        sacarSelfieMarulin
+    );
+
+
+    btnCerrarCamara?.addEventListener(
+        "click",
+        () => {
+
+            detenerCamaraSelfie();
+
+            if (selfieEstado) {
+                selfieEstado.textContent =
+                    "Cámara cerrada. Podés volver a activarla cuando quieras.";
+            }
+        }
+    );
+
+
+    btnRepetirSelfie?.addEventListener(
+        "click",
+        () => {
+
+            selfieResultado?.classList.add(
+                "selfie-oculto"
+            );
+
+            selfieDataUrl = null;
+
+            if (selfieEstado) {
+                selfieEstado.textContent =
+                    "Acomodate y sacá otra cuando quieras 📸";
+            }
+        }
+    );
+
+
+    btnGuardarSelfie?.addEventListener(
+        "click",
+        () => {
+
+            if (!selfieDataUrl) {
+                return;
+            }
+
+            const enlace =
+                document.createElement("a");
+
+            enlace.href = selfieDataUrl;
+            enlace.download = "selfie-marulin-verdin.png";
+
+            document.body.appendChild(enlace);
+            enlace.click();
+            enlace.remove();
+        }
+    );
+
+
+    window.addEventListener(
+        "pagehide",
+        detenerCamaraSelfie
     );
 
 

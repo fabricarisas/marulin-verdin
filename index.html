@@ -13,7 +13,7 @@
 
     <link
         rel="stylesheet"
-        href="style.css?v=71"
+        href="style.css?v=74"
     >
 </head>
 
@@ -55,12 +55,24 @@
                         Inicio
                     </a>
 
+                    <a href="#hablar">
+                        Hablá con Marulín
+                    </a>
+
                     <a href="#juegos">
                         Juegos
                     </a>
 
                     <a href="#ruleta">
                         Ruleta
+                    </a>
+
+                    <a href="#que-marulin">
+                        ¿Qué Marulín sos?
+                    </a>
+
+                    <a href="#selfie">
+                        Selfie
                     </a>
 
                     <a href="#como-lo-hicimos">
@@ -172,6 +184,121 @@
         </div>
 
     </header>
+
+
+
+    <!-- =====================================
+         HABLA CON MARULIN
+    ====================================== -->
+
+    <section
+        class="hablar-section"
+        id="hablar"
+    >
+
+        <div class="container hablar-contenido">
+
+            <h2 class="titulo-seccion">
+                💬 Hablá con Marulín
+            </h2>
+
+            <p class="subtitulo-seccion">
+                Saludalo y escuchá lo que tiene para contarte 🌱
+            </p>
+
+            <div class="marulin-conversacion">
+
+                <div class="marulin-avatar-wrap">
+
+                    <img
+                        id="marulinHablaImagen"
+                        class="marulin-habla-imagen"
+                        src="images/maru1.png"
+                        alt="Marulín Verdín hablando"
+                    >
+
+                    <div
+                        id="indicadorHabla"
+                        class="indicador-habla oculto-chat"
+                    >
+                        🔊 Hablando...
+                    </div>
+
+                </div>
+
+                <div
+                    id="textoMarulin"
+                    class="burbuja-marulin"
+                    aria-live="polite"
+                >
+                    ¡Hola! Primero saludame para empezar a charlar 🌱
+                </div>
+
+            </div>
+
+            <button
+                id="saludarMarulin"
+                class="btn-saludo-marulin"
+            >
+                👋 Hola Marulín, ¿cómo estás?
+            </button>
+
+            <div
+                id="opcionesMarulin"
+                class="opciones-marulin oculto-chat"
+            >
+
+                <button
+                    class="boton-charla"
+                    data-charla="consejo"
+                >
+                    🌿 Dame un consejo
+                </button>
+
+                <button
+                    class="boton-charla"
+                    data-charla="dato"
+                >
+                    🧠 Contame un dato curioso
+                </button>
+
+                <button
+                    class="boton-charla"
+                    data-charla="chamuyo"
+                >
+                    💘 Tirame un chamuyo
+                </button>
+
+                <button
+                    class="boton-charla"
+                    data-charla="favorita"
+                >
+                    🌸 ¿Cuál es tu planta favorita?
+                </button>
+
+                <button
+                    class="boton-charla"
+                    data-charla="lindo"
+                >
+                    💚 Decime algo lindo
+                </button>
+
+                <button
+                    class="boton-charla"
+                    data-charla="recomendar"
+                >
+                    🪴 ¿Qué planta me recomendás?
+                </button>
+
+            </div>
+
+            <p class="nota-voz-marulin">
+                🔊 Subí el volumen del celular para escuchar a Marulín.
+            </p>
+
+        </div>
+
+    </section>
 
 
 
@@ -463,6 +590,281 @@
 
 
     <!-- =====================================
+         QUE MARULIN SOS
+    ====================================== -->
+
+    <section
+        class="que-marulin-section"
+        id="que-marulin"
+    >
+
+        <div class="container que-marulin-contenido">
+
+            <h2 class="titulo-seccion">
+                🌱 ¿Qué Marulín sos?
+            </h2>
+
+            <p class="subtitulo-seccion">
+                Respondé 7 preguntas y descubrí qué versión de Marulín te representa más.
+            </p>
+
+            <div class="test-marulin-card">
+
+                <div
+                    id="testMarulinInicio"
+                    class="test-marulin-inicio"
+                >
+
+                    <div class="test-marulin-iconos">
+                        💘 🪩 💤 😎
+                    </div>
+
+                    <h3>
+                        ¿Listo para descubrirlo?
+                    </h3>
+
+                    <p>
+                        No la pienses tanto. Elegí la respuesta que más te represente.
+                    </p>
+
+                    <button
+                        id="btnComenzarTestMarulin"
+                        class="btn-zona-marulin"
+                    >
+                        🌱 Empezar test
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="testMarulinPreguntas"
+                    class="test-marulin-preguntas test-marulin-oculto"
+                >
+
+                    <div class="test-marulin-progreso-wrap">
+
+                        <div class="test-marulin-contador">
+                            Pregunta <span id="testMarulinNumero">1</span>/7
+                        </div>
+
+                        <div class="test-marulin-barra">
+                            <div id="testMarulinProgreso"></div>
+                        </div>
+
+                    </div>
+
+                    <h3 id="testMarulinPregunta"></h3>
+
+                    <div
+                        id="testMarulinOpciones"
+                        class="test-marulin-opciones"
+                    ></div>
+
+                </div>
+
+
+                <div
+                    id="testMarulinResultado"
+                    class="test-marulin-resultado test-marulin-oculto"
+                >
+
+                    <img
+                        id="testMarulinImagenResultado"
+                        src="images/maru2.png"
+                        alt="Resultado del test de Marulín"
+                    >
+
+                    <p class="test-marulin-etiqueta">
+                        TU RESULTADO ES...
+                    </p>
+
+                    <h3 id="testMarulinTituloResultado"></h3>
+
+                    <p id="testMarulinTextoResultado"></p>
+
+                    <div class="test-marulin-acciones">
+
+                        <button
+                            id="btnRepetirTestMarulin"
+                            class="btn-zona-marulin"
+                        >
+                            🔄 Hacer el test de nuevo
+                        </button>
+
+                        <a
+                            href="#selfie"
+                            class="btn-zona-marulin btn-zona-secundario"
+                        >
+                            📸 Ir a la selfie
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         SELFIE CON MARULIN
+    ====================================== -->
+
+    <section
+        class="selfie-section"
+        id="selfie"
+    >
+
+        <div class="container selfie-contenido">
+
+            <h2 class="titulo-seccion">
+                📸 Selfie de la Feria
+            </h2>
+
+            <p class="subtitulo-seccion">
+                Elegí con quién querés sacarte la foto, activá la cámara y guardá tu recuerdo de la Feria de Ciencias 2026.
+            </p>
+
+            <div class="selfie-card">
+
+                <h3 class="selfie-subtitulo">
+                    1. Elegí tu marco
+                </h3>
+
+                <div
+                    id="selfieOpciones"
+                    class="selfie-opciones"
+                ></div>
+
+
+                <h3 class="selfie-subtitulo selfie-paso-camara">
+                    2. Sacate la foto
+                </h3>
+
+                <div class="selfie-stage" id="selfieStage">
+
+                    <video
+                        id="selfieVideo"
+                        autoplay
+                        muted
+                        playsinline
+                    ></video>
+
+                    <div
+                        id="selfiePlaceholder"
+                        class="selfie-placeholder"
+                    >
+                        <span>📷</span>
+                        <p>Activá la cámara para empezar</p>
+                    </div>
+
+                    <img
+                        id="selfieMarco"
+                        class="selfie-marco"
+                        src="images/selfies/marulinmarco.png"
+                        alt="Marco elegido para la selfie"
+                    >
+
+                </div>
+
+
+                <p
+                    id="selfieEstado"
+                    class="selfie-estado"
+                    aria-live="polite"
+                >
+                    Elegí un marco y tocá “Activar cámara”.
+                </p>
+
+
+                <div class="selfie-botones">
+
+                    <button
+                        id="btnActivarCamara"
+                        class="btn-zona-marulin"
+                    >
+                        📷 Activar cámara
+                    </button>
+
+                    <button
+                        id="btnCambiarCamara"
+                        class="btn-zona-marulin btn-zona-secundario selfie-oculto"
+                    >
+                        🔄 Girar cámara
+                    </button>
+
+                    <button
+                        id="btnSacarSelfie"
+                        class="btn-zona-marulin selfie-oculto"
+                    >
+                        📸 Sacar foto
+                    </button>
+
+                    <button
+                        id="btnCerrarCamara"
+                        class="btn-zona-marulin btn-zona-secundario selfie-oculto"
+                    >
+                        ✖ Cerrar cámara
+                    </button>
+
+                </div>
+
+
+                <canvas
+                    id="selfieCanvas"
+                    width="941"
+                    height="1672"
+                    hidden
+                ></canvas>
+
+
+                <div
+                    id="selfieResultado"
+                    class="selfie-resultado selfie-oculto"
+                >
+
+                    <h3>
+                        💚 ¡Quedó lista!
+                    </h3>
+
+                    <img
+                        id="selfieFotoFinal"
+                        alt="Tu selfie de Marulín Verdín"
+                    >
+
+                    <div class="selfie-botones">
+
+                        <button
+                            id="btnRepetirSelfie"
+                            class="btn-zona-marulin btn-zona-secundario"
+                        >
+                            🔄 Sacar otra
+                        </button>
+
+                        <button
+                            id="btnGuardarSelfie"
+                            class="btn-zona-marulin"
+                        >
+                            💾 Guardar foto
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
          COMO CREAMOS EL BOT
     ====================================== -->
 
@@ -630,12 +1032,24 @@
                     Inicio
                 </a>
 
+                <a href="#hablar">
+                    Hablá con Marulín
+                </a>
+
                 <a href="#juegos">
                     Juegos
                 </a>
 
                 <a href="#ruleta">
                     Ruleta
+                </a>
+
+                <a href="#que-marulin">
+                    ¿Qué Marulín sos?
+                </a>
+
+                <a href="#selfie">
+                    Selfie
                 </a>
 
                 <a href="#como-lo-hicimos">
@@ -649,7 +1063,7 @@
     </footer>
 
 
-    <script src="script.js?v=71"></script>
+    <script src="script.js?v=75"></script>
 
 </body>
 
